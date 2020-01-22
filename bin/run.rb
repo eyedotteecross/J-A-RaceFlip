@@ -16,6 +16,7 @@ system("clear")
 #user signs in with name
 user_name = prompt.ask("What is your name?")
 $user = User.create(name:"#{user_name}",balance:100000,cars:[])
+user = $user
 system("clear")
 
 #user chooses a car from all cars
@@ -52,8 +53,7 @@ def race_opponent?(your_car)
 end 
 
 def new_race(car_1,car_2)
-    puts car_1
-    puts car_2
+    
 end 
 
 def garage

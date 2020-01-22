@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
         system("clear")
         cars
         end
+
+    def user_cars 
+        UserCar.all.select{|user_car| user_car.user == self}
+    end
     
     def add_car(car_id)
     UserCar.create(mileage:0,condition:"Excellent",user_id:self.id,car_id:car_id)
