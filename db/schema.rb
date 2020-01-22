@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.string "make"
     t.string "model"
     t.integer "value"
+    t.integer "top_speed"
   end
 
   create_table "races", force: :cascade do |t|

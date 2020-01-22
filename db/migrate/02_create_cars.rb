@@ -4,6 +4,7 @@ class CreateCars < ActiveRecord::Migration[5.2]
         t.string :make
         t.string :model
         t.integer :value 
+        t.integer :top_speed
         end
      end
 end

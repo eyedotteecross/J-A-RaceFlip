@@ -5,9 +5,17 @@ require_relative'../config/environment'
 prompt = TTY::Prompt.new
 ActiveRecord::Base.logger.level = 1 
 
+# def render_ascii_art
+#     File.readlines("lib/ascii_art.txt") do |line|
+#       puts line
+#     end
+#   end
+
 system("clear")
 #welcome Message
+system("say 'SKIRT SKIRT'")
 puts "Welcome to A/J Raceway!"
+# render_ascii_art
 puts 
 puts
 puts "PRESS ANY KEY TO CONTINUE"
@@ -55,10 +63,15 @@ end
 
 def new_race(car_1,car_2)
     chosen_model = car_1.split[1]
-    current_user_car = $user.user_cars.find{|user_car| chosen_model == user_car.car.model} 
+    car_1 = $user.user_cars.find{|user_car| chosen_model == user_car.car.model} 
     system("clear")
-    condition = current_user_car.condition
-    # top_speed = current_user_car.car.top_speed 
+    if car_1.car.top_speed > car_2.top_speed
+    system("say 'You Win!'") 
+    puts "YOU WIN!"   
+    else 
+    system("say 'Gotta be quicker than that!'")
+    puts "Hold this L" 
+    end  
 end 
 
 def garage
@@ -71,9 +84,7 @@ def garage
         race_opponent?(your_car)
         # else 
         # fix  
-    end 
-    
-    binding.pry   
+    end  
 end 
 
 car_list
