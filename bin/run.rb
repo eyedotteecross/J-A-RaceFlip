@@ -15,32 +15,71 @@ system("clear")
 
 #user signs in with name
 user_name = prompt.ask("What is your name?")
-user = User.create(name:"#{user_name}",balance:100000,cars:[])
+$user = User.create(name:"#{user_name}",balance:100000,cars:[])
 system("clear")
 
 #user chooses a car from all cars
-car_makes = Car.all.map{|car|car.make}.uniq
-system("clear")
-make_choice = prompt.select("Hi #{user.name}. Please choose a vehicle make.",car_makes)
-system("clear")
-car_models = Car.all.select{|car| make_choice == car.make}.map{|car|car.model}
-system("clear")
-model_choice = prompt.select("Pick a model",car_models)
-system("clear")
-car_choice = Car.all.find{|car| car.model == model_choice}
-UserCar.create(mileage:0, condition:"Excellent", user_id:user.id, car_id: car_choice.id)
-system("clear")
+def car_list
+    prompt = TTY::Prompt.new
+        car_makes = Car.all.map{|car|car.make}.uniq
+        system("clear")
+        make_choice = prompt.select("Hi #{$user.name}. Please choose a vehicle make.",car_makes)
+        system("clear")
+        car_models = Car.all.select{|car| make_choice == car.make}.map{|car|car.model}
+        system("clear")
+        model_choice = prompt.select("Pick a model",car_models)
+        system("clear")
+        car_choice = Car.all.find{|car| car.model == model_choice}
+        UserCar.create(mileage:0, condition:"Excellent", user_id:$user.id, car_id: car_choice.id)
+        system("clear")
+end 
 
-binding.pry
 
-# puts "Welcome to your garage #{user_name}"
-# n/
-# n/
-# puts 
+def race_opponent?(your_car)
+    prompt = TTY::Prompt.new
+    car_makes = Car.all.map{|car|car.make}.uniq
+    system("clear")
+    make_choice = prompt.select("Choose a vehicle to race against",car_makes)
+    system("clear")
+    car_models = Car.all.select{|car| make_choice == car.make}.map{|car|car.model}
+    system("clear")
+    model_choice = prompt.select("Pick a model",car_models)
+    system("clear")
+    opponent_choice = Car.all.find{|car| car.model == model_choice}
+    system("clear")
+    new_race(your_car, opponent_choice)
+    # say "SKRT SKRT"
+end 
+
+def new_race(car_1,car_2)
+    puts car_1
+    puts car_2
+end 
 
 def garage
-prompt.select("These are your available vehicles", user.cars.map{|car| "#{car.make} #{car.model} value:$#{car.value}"})
+    prompt = TTY::Prompt.new
+    your_car = prompt.select("These are your available vehicles BALANCE: $#{$user.balance}", $user.mapped_cars)
+    system("clear")
+    choices = ["Race", "Fix"]
+    choice = prompt.select("#{your_car}", choices) 
+    if choice == "Race"
+        race_opponent?(your_car)
+        # else 
+        # fix  
+    end 
+    
 end 
+
+car_list
+garage 
+
+
+
+
+
+
+
+
 #user gets to choose racer/car to race
 
 #user either win/loss and get mieage increase and balance (+) or (-)
