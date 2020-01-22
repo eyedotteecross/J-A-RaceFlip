@@ -53,7 +53,12 @@ def race_opponent?(your_car)
 end 
 
 def new_race(car_1,car_2)
-    
+    chosen_model = car_1.split[1]
+    current_user_car = $user.user_cars.find{|user_car| chosen_model == user_car.car.model} 
+    system("clear")
+
+    puts "#{current_user_car}  #{car_2}"
+
 end 
 
 def garage
@@ -73,14 +78,6 @@ end
 car_list
 garage 
 
-
-
-
-
-
-
-
-#user gets to choose racer/car to race
 
 #user either win/loss and get mieage increase and balance (+) or (-)
 
