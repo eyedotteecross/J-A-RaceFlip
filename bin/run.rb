@@ -57,7 +57,7 @@ def new_race(car_1,car_2)
     current_user_car = $user.user_cars.find{|user_car| chosen_model == user_car.car.model} 
     system("clear")
 
-    puts "#{current_user_car}  #{car_2}"
+    if {current_user_car} topspeed >
 
 end 
 
