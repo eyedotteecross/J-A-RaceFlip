@@ -3,6 +3,7 @@ require_relative'../config/environment'
 # require'pry'
 
 prompt = TTY::Prompt.new
+ActiveRecord::Base.logger.level = 1 
 
 system("clear")
 #welcome Message
@@ -56,14 +57,13 @@ def new_race(car_1,car_2)
     chosen_model = car_1.split[1]
     current_user_car = $user.user_cars.find{|user_car| chosen_model == user_car.car.model} 
     system("clear")
-
-    puts "#{current_user_car}  #{car_2}"
-
+    condition = current_user_car.condition
+    # top_speed = current_user_car.car.top_speed 
 end 
 
 def garage
     prompt = TTY::Prompt.new
-    your_car = prompt.select("These are your available vehicles BALANCE: $#{$user.balance}", $user.mapped_cars)
+    your_car = prompt.select("These are your available vehicles BALANCE: $#{$user.balance}", $user.cars_with_conditions)
     system("clear")
     choices = ["Race", "Fix"]
     choice = prompt.select("#{your_car}", choices) 
@@ -73,6 +73,7 @@ def garage
         # fix  
     end 
     
+    binding.pry   
 end 
 
 car_list
