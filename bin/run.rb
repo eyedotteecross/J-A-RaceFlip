@@ -11,14 +11,15 @@ gets.chomp
 
 #user signs in with name
 user_name = prompt.ask("what is your name player1")
+User.create(name:"#{user_name}",balance:100000,cars:[])
 
 #user chooses a car from all cars
-car_makes = Car.all.map{|car| car.make}
+car_makes = Car.all.map{|car|car.make}.uniq
 a = prompt.select("What Car do you want",car_makes)
 car_model = Car.all.select{|car| a == car.make}.map{|car|car.model}
 b = prompt.select("What Model do you want",car_model)
-car_year = Car.all.select{|car| b == car.model}.map{|car|car.year}
-c = prompt.select("What Year do you want",car_year)
+
+
 
 #user gets to choose racer/car to race
 
