@@ -19,8 +19,10 @@ a = prompt.select("What Car do you want",car_makes)
 car_model = Car.all.select{|car| a == car.make}.map{|car|car.model}
 b = prompt.select("What Model do you want",car_model)
 
-
-
+puts "Welcome to your garage #{user_name}"
+n/
+n/
+puts 
 #user gets to choose racer/car to race
 
 #user either win/loss and get mieage increase and balance (+) or (-)
