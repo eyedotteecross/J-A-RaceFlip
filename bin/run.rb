@@ -13,13 +13,16 @@ gets.chomp
 user_name = prompt.ask("what is your name player1")
 
 #user chooses a car from all cars
-car_makes = Car.all.map{|car| car.make}
+car_makes = Car.all.map{|car| car.make}.uniq
 a = prompt.select("What Car do you want",car_makes)
 car_model = Car.all.select{|car| a == car.make}.map{|car|car.model}
 b = prompt.select("What Model do you want",car_model)
-car_year = Car.all.select{|car| b == car.model}.map{|car|car.year}
-c = prompt.select("What Year do you want",car_year)
 
+
+puts "Welcome to your garage #{user_name}"
+n/
+n/
+puts 
 #user gets to choose racer/car to race
 
 #user either win/loss and get mieage increase and balance (+) or (-)
