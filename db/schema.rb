@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 4) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.integer "balance"
-    t.string "cars"
   end
 
 end

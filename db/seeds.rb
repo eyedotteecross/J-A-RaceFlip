@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-acura1 = Car.create(make:"Acura", model:"TL", value:28000)
-=======
 acura1 = Car.create(make:"Acura", model:"TL",  value:28000)
->>>>>>> 8b37795e1ace5eb25885b0d2a363940c6beb6428
 bmw1 = Car.create(make: "BMW", model: "5 series", value: 40000)
 ford1 = Car.create(make:"Ford",model: "Mustang", value: 28000)
 tesla1 = Car.create(make:"Tesla",model: "Model X", value: 100000)

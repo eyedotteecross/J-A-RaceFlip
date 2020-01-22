@@ -27,8 +27,8 @@ car_models = Car.all.select{|car| make_choice == car.make}.map{|car|car.model}
 system("clear")
 model_choice = prompt.select("Pick a model",car_models)
 system("clear")
-# user.cars << Car.all.find{|car| model_choice == car.model}
-UserCar.create(mileage:0, condition:"Excellent", user_id:user.id, car_id:user.cars.last.id)
+car_choice = Car.all.find{|car| car.model == model_choice}
+UserCar.create(mileage:0, condition:"Excellent", user_id:user.id, car_id: car_choice.id)
 system("clear")
 
 binding.pry
