@@ -17,14 +17,14 @@ system("clear")
 #user chooses a car from all cars
 car_makes = Car.all.map{|car|car.make}.uniq
 system("clear")
-a = prompt.select("Hi #{user.name}. Please choose a vehicle make.",car_makes)
+make_choice = prompt.select("Hi #{user.name}. Please choose a vehicle make.",car_makes)
 system("clear")
-car_model = Car.all.select{|car| a == car.make}.map{|car|car.model}
+car_models = Car.all.select{|car| make_choice == car.make}.map{|car|car.model}
 system("clear")
-b = prompt.select("Pick a model",car_model)
+model_choice = prompt.select("Pick a model",car_models)
 system("clear")
-
-
+user.cars << Car.all.find{|car| model_choice == car.model}
+system("clear")
 # puts "Welcome to your garage #{user_name}"
 # n/
 # n/
