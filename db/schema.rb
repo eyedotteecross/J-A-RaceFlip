@@ -21,16 +21,15 @@ ActiveRecord::Schema.define(version: 4) do
 
   create_table "races", force: :cascade do |t|
     t.integer "prize"
-    t.integer "mileage_increase"
     t.string "result"
-    t.integer "user_car1_id"
+    t.integer "user_id"
   end
 
   create_table "user_cars", force: :cascade do |t|
-    t.integer "mileage"
-    t.string "condition"
+    t.integer "condition"
     t.integer "user_id"
     t.integer "car_id"
+    t.integer "uc_top_speed"
   end
 
   create_table "users", force: :cascade do |t|
