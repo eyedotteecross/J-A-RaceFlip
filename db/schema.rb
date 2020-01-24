@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 4) do
+ActiveRecord::Schema.define(version: 5) do
 
   create_table "cars", force: :cascade do |t|
     t.string "make"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.integer "balance"
     t.integer "wins"
     t.integer "losses"
+    t.integer "num_cars"
   end
 
 end

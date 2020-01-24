@@ -37,4 +37,17 @@ class User < ActiveRecord::Base
         self.save
     end 
 
+    def self.leaderboard(stat)
+        system("clear")
+            
+            if stat == "Wins" 
+            tp self.all.order(wins: :DESC)
+                elsif stat == "Balance"
+                    tp self.all.order(balance: :DESC)
+                        elsif stat == "Cars"
+                            tp self.all.order(num_cars: :DESC)
+                            end 
+                        
+    end 
+
 end

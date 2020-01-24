@@ -5,6 +5,7 @@ class UserCar < ActiveRecord::Base
     
     def new_balance 
         self.user.balance -= self.car.value
+        self.user.num_cars += 1
         self.user.save
         self.save
     end 
@@ -18,6 +19,7 @@ class UserCar < ActiveRecord::Base
 
     def sell(car)
         self.user.balance += self.car.value * self.condition/100
+        self.user.num_cars -= 1
         self.user.save
         self.delete 
     end 
