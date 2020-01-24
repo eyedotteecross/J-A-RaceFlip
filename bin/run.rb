@@ -108,19 +108,19 @@ def garage
                     car_object = user.cars.find{|car| car.model == chosen_vehicle.split[1]}
                     uc_object = user.user_cars.find{|ucar| ucar.car == car_object}  
                         system("clear")
-                            choices = ["Race", "Fix $#{car_object.value/3}", "Sell", "BACK"]
+                            choices = ["Race 🏁", "Fix 🔧 -$#{car_object.value/3}", "Sell 💸 +$#{car_object.value * uc_object.condition/100}", "BACK"]
                                 choice = prompt.select("#{chosen_vehicle}", choices)
-                                    if choice == "Race"
+                                    if choice == "Race 🏁"
                                         race_opponent?(car_object)
-                                            elsif choice == "Fix $#{car_object.value/3}" 
+                                            elsif choice == "Fix 🔧 -$#{car_object.value/3}" 
                                                 uc_object.fix(car_object)
                                                     puts "Your vehicle has been repaired. You have been charged $#{car_object.value/3}"
                                                     puts
                                                     garage()
-                                                        elsif choice == "Sell" && user.user_cars.size != 1
+                                                        elsif choice == "Sell 💸 +$#{car_object.value * uc_object.condition/100}" && user.user_cars.size != 1
                                                             uc_object.sell(car_object)
                                                             garage()
-                                                                elsif choice == "Sell" && user.user_cars.size == 1     
+                                                                elsif choice == "Sell 💸 +$#{car_object.value * uc_object.condition/100}" && user.user_cars.size == 1     
                                                                     system("clear")
                                                                     puts "Nope. You must keep one car in garage!" 
                                                                     garage()               
