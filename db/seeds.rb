@@ -1,7 +1,7 @@
 acura1 = Car.create(make:"Acura", model:"TL",  value:28000, top_speed: 125)
 bmw1 = Car.create(make: "BMW", model: "5-series", value: 40000, top_speed: 130)
 ford1 = Car.create(make:"Ford",model: "Mustang", value: 28000, top_speed: 121)
-tesla1 = Car.create(make:"Tesla",model: "Model X", value: 100000, top_speed: 160)
+tesla1 = Car.create(make:"Tesla",model: "ModelX", value: 100000, top_speed: 160)
 honda1 = Car.create(make:"Honda",model: "Accord", value: 40000, top_speed: 106)
 bugatti1 = Car.create(make:"Bugatti",model: "Chiron", value: 2000000, top_speed: 305)
 tesla2 = Car.create(make:"Tesla",model: "Roadster", value: 180000, top_speed: 250)

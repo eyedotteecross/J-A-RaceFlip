@@ -2,8 +2,6 @@ class User < ActiveRecord::Base
     has_many :user_cars
     has_many :cars, through: :user_cars
 
-
-
     def cars 
         cars = self.user_cars{|user_car| user_car.user == self}.map{|user_car| user_car.car}
         cars
@@ -24,7 +22,19 @@ class User < ActiveRecord::Base
     end 
 
     def cars_with_conditions
-        self.user_cars.map{|uc| "#{uc.car.make} #{uc.car.model} VALUE: #{uc.car.value} CONDITION:%#{uc.condition}"}   
+        self.user_cars.map{|uc| "#{uc.car.make} #{uc.car.model} VALUE: $#{uc.car.value} CONDITION:%#{uc.condition}"}   
+    end 
+
+    def won
+        self.balance += 25000
+        self.wins +=1
+        self.save
+    end 
+
+    def lost
+        self.balance -= 25000
+        self.losses += 1
+        self.save
     end 
 
 end
