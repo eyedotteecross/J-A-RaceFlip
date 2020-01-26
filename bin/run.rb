@@ -75,10 +75,10 @@ def make_choice_meth(game_env,car_object=nil)
         if make_choice != "SWITCH YOUR VEHICLE" 
             system("clear") 
             model_choice_meth(make_choice,"race",car_object) 
-        elsif model_choice == "SWITCH YOUR VEHICLE"
+        elsif make_choice == "SWITCH YOUR VEHICLE"
             system("clear")  
             race_meth()
-        elsif model_choice == "BACK TO MAIN MENU"
+        elsif make_choice == "BACK TO MAIN MENU"
             menu()
         end     
     end 
@@ -87,7 +87,7 @@ end
 def model_choice_meth(make,game_env,car_object=nil)
     prompt = TTY::Prompt.new
     shop_models = Car.all.select{|car| make == car.make}.map{|car| "#{car.model} PRICE:$#{car.value}"}.push("BACK","EXIT SHOP")
-    race_models = Car.all.select{|car| make == car.make}.map{|car| "#{car.model} PRIZE:$#{(car.value * 0.65).to_i}"}.push("BACK","SWITCH YOUR VEHICLE")
+    race_models = Car.all.select{|car| make == car.make}.map{|car| "#{car.model} PRIZE:$#{(car.value * 0.65).to_i}"}.push("BACK","SWITCH YOUR VEHICLE","BACK TO MAIN MENU")
     if game_env == "shop" 
         model_choice = prompt.select("What model would you like?", shop_models)
         if model_choice != "BACK" && model_choice != "EXIT SHOP"
@@ -115,16 +115,20 @@ def model_choice_meth(make,game_env,car_object=nil)
     if game_env == "race" 
         puts "#{car_object} Race 🏁"  
         model_choice = prompt.select("Pick your opponent vehicle's model", race_models)
-        if model_choice != "BACK" && model_choice != "SWITCH YOUR VEHICLE"
+        # binding.pry
+        if model_choice != "BACK" && model_choice != "SWITCH YOUR VEHICLE" && model_choice != "BACK TO MAIN MENU"
             system("clear")
             return Car.all.find{|car|car.model + " PRIZE:$#{(car.value * 0.65).to_i}" == model_choice} 
         elsif model_choice == "BACK"
             system("clear")
             make 
             make_choice_meth("race",car_object)
-        else 
+        elsif model_choice == "SWITCH YOUR VEHICLE"
             system("clear")
             race_meth()
+        elsif model_choice == "BACK TO MAIN MENU"
+            system("clear")
+            menu()
         end 
     end
 end 
@@ -227,7 +231,7 @@ def new_race(car_1,car_2)
     if uc.uc_top_speed > car_2.top_speed
         system("say 'Congratulations #{user.name} You Won!'") 
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
-puts "                                     🚁             \n          
+puts "                          🚁                        \n          
 🏢 🏢 🌴🏦 🏚️ 🏫 🌳 ⛪ 🏥 🏪 🏠🏠🌴 🏤 🌴 🏢 🌳🌳      \n
 🚙⁣      🚓      🚓     🚓                                \n
     🚗      🚓   🚓    🚓     🚓                     \n\n\n"
