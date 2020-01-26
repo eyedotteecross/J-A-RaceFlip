@@ -77,7 +77,7 @@ def make_choice_meth(game_env,car_object=nil)
             model_choice_meth(make_choice,"race",car_object) 
         else
             system("clear")  
-            garage()
+            race_meth()
         end     
     end 
 end 
@@ -122,7 +122,7 @@ def model_choice_meth(make,game_env,car_object=nil)
             make_choice_meth("race",car_object)
         else 
             system("clear")
-            garage()
+            race_meth()
         end 
     end
 end 
@@ -164,12 +164,9 @@ def garage
         car_object = user.cars.find{|car| car.model == chosen_vehicle.split[1]}
         uc_object = user.user_cars.find{|ucar| ucar.car == car_object}  
         system("clear")
-        choices = ["Race 🏁", "Fix 🔧 -$#{car_object.value * uc_object.condition/1111}", "Sell 💸 +$#{car_object.value * uc_object.condition/100}", "BACK"]
+        choices = ["Fix 🔧 -$#{car_object.value * uc_object.condition/1111}", "Sell 💸 +$#{car_object.value * uc_object.condition/100}", "BACK"]
         choice = prompt.select("#{chosen_vehicle}", choices)
-        if choice == "Race 🏁"
-            system("clear")
-            race_opponent?(chosen_vehicle,car_object)
-        elsif choice == "Fix 🔧 -$#{car_object.value * uc_object.condition/1111}"
+        if  choice == "Fix 🔧 -$#{car_object.value * uc_object.condition/1111}"
             repair_cost = "#{car_object.value * uc_object.condition/1111}" 
             uc_object.fix(car_object)
             puts "Your vehicle has been repaired. You have been charged $#{repair_cost}"
@@ -191,9 +188,18 @@ end
 
 def race_meth 
     prompt = TTY::Prompt.new
-    puts "#{user.name} Record:#{user.wins}-#{user.losses} BALANCE:$#{user.balance} Win Streak:\n\n\n"
-    your_vehicles = user.cars_with_conditions << "EXIT GARAGE"
-    chosen_vehicle = prompt.select("These are your available vehicles:", your_vehicles)
+    puts "#{user.name} Record:#{user.wins}-#{user.losses} BALANCE:$#{user.balance} Cars Owned:#{user.num_cars} Win Streak:\n\n\n"
+    your_vehicles = user.cars_with_conditions << "BACK TO MAIN MENU"
+    chosen_vehicle = prompt.select("Choose your vehicle", your_vehicles)
+    if chosen_vehicle == "BACK TO MAIN MENU"
+        system("clear")
+        menu()
+    else     
+        car_object = user.cars.find{|car| car.model == chosen_vehicle.split[1]}
+        uc_object = user.user_cars.find{|ucar| ucar.car == car_object}  
+        system("clear")
+        race_opponent?(chosen_vehicle,car_object)
+    end
 end 
 
 #This method is for selecting an opponent
@@ -219,6 +225,10 @@ def new_race(car_1,car_2)
     if uc.uc_top_speed > car_2.top_speed
         system("say 'Congratulations #{user.name} You Won!'") 
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
+        puts "                   🚁                              \n          
+        🏢 🏢 🌴🏦 🏚️ 🏫 🌳  ⛪ 🏥 🏪 🏠🏠🌴 🏤 🌴 🏢 🌳🌳     \n
+        🚙⁣      🚓      🚓     🚓                                \n
+            🚗      🚓   🚓    🚓     🚓                    \n\n\n"
         puts "YOU WIN! \n\n\n$#{(car_2.value * 0.65).to_i} will be added to your balance.😎    Your record is now #{user.wins}-#{user.losses}!" 
         uc.won(car_1,car_2) 
         uc.deteriorate()
@@ -236,11 +246,11 @@ end
 #Displays a navigational menu
 def menu 
     prompt = TTY::Prompt.new
-    choices = ["Race", "Go to Garage", "Open Shop", "Leaderboards", "Log Out"]
+    choices = ["Race🏎️", "Go to Garage🧰", "Open Shop🔑", "Leaderboards📈", "Log Out"]
     choice = prompt.select("", choices) 
     if choice == choices[0] && user.user_cars.size > 0               
         system("clear")
-        garage() #############RACEMETH
+        race_meth() #############RACEMETH
     elsif choice == choices[0] && user.user_cars.size == 0 
         system("clear")
         puts "You have no cars to race. Purchase one from the shop first!"
