@@ -11,8 +11,9 @@ class UserCar < ActiveRecord::Base
     end 
     
     def fix(car)
-        self.condition = 100 
-        self.user.balance -= self.car.value/3
+        self.user.balance -= self.car.value * self.condition/1111 
+        self.condition = 100
+        self.uc_top_speed = self.car.top_speed
         self.user.save
         self.save
     end 
@@ -25,17 +26,29 @@ class UserCar < ActiveRecord::Base
     end 
 
     def top_speed_nerf
-        self.uc_top_speed *= (self.condition/50)
+        self.uc_top_speed *= (self.condition.to_f/100)
         self.save
     end
     
     def top_speed_heavy_nerf
-        self.uc_top_speed *= (self.condition/75)
+        self.uc_top_speed *= (self.condition.to_f/120)
         self.save
     end 
 
     def deteriorate
-        self.condition -= 5
+        self.condition -= 7
         self.save
+    end 
+
+    def won(car_1,car_2)
+        self.user.balance += (car_2.value * 0.65).to_i
+        self.user.wins += 1
+        self.user.save
+    end 
+
+    def lost(car_1,car_2)
+        self.user.balance -= 25000
+        self.user.losses += 1
+        self.user.save
     end 
 end

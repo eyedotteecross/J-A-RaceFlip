@@ -22,32 +22,21 @@ class User < ActiveRecord::Base
     end 
 
     def cars_with_conditions
-        self.user_cars.map{|uc| "#{uc.car.make} #{uc.car.model} VALUE: $#{uc.car.value} CONDITION:%#{uc.condition}"}   
-    end 
-
-    def won
-        self.balance += 25000
-        self.wins +=1
-        self.save
-    end 
-
-    def lost
-        self.balance -= 25000
-        self.losses += 1
-        self.save
+        self.user_cars.map{|uc| "#{uc.car.make} #{uc.car.model} VALUE: $#{uc.car.value * uc.condition/100} CONDITION:%#{uc.condition}"}   
     end 
 
     def self.leaderboard(stat)
         system("clear")
-            
-            if stat == "Wins" 
-            tp self.all.order(wins: :DESC)
-                elsif stat == "Balance"
-                    tp self.all.order(balance: :DESC)
-                        elsif stat == "Cars"
-                            tp self.all.order(num_cars: :DESC)
-                            end 
-                        
+        if stat == "Wins" 
+            tp self.all.order(wins: :DESC).limit(15)
+            puts "\nPRESS ENTER TO GO BACK"
+        elsif stat == "Balance"
+            tp self.all.order(balance: :DESC).limit(15)
+            puts "\nPRESS ENTER TO GO BACK"
+        elsif stat == "Cars"
+            tp self.all.order(num_cars: :DESC).limit(15)
+            puts "\nPRESS ENTER TO GO BACK"    
+        end 
     end 
 
 end
