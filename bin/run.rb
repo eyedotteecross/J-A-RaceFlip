@@ -55,7 +55,7 @@ end
 def make_choice_meth(game_env,car_object=nil) 
     prompt = TTY::Prompt.new
     shop_makes = Car.all.map{|car|car.make}.uniq << "EXIT SHOP"
-    race_makes = Car.all.map{|car|car.make}.uniq << "SWITCH YOUR VEHICLE"
+    race_makes = Car.all.map{|car|car.make}.uniq.push("SWITCH YOUR VEHICLE", "BACK TO MAIN MENU")
     if game_env == "shop"
         puts "WELCOME TO THE SHOP! Balance:$#{user.balance} \n\n\n"
         make_choice = prompt.select("#{user.name} Please choose a vehicle make to see models available.",shop_makes)
@@ -75,9 +75,11 @@ def make_choice_meth(game_env,car_object=nil)
         if make_choice != "SWITCH YOUR VEHICLE" 
             system("clear") 
             model_choice_meth(make_choice,"race",car_object) 
-        else
+        elsif model_choice == "SWITCH YOUR VEHICLE"
             system("clear")  
             race_meth()
+        elsif model_choice == "BACK TO MAIN MENU"
+            menu()
         end     
     end 
 end 
@@ -225,10 +227,10 @@ def new_race(car_1,car_2)
     if uc.uc_top_speed > car_2.top_speed
         system("say 'Congratulations #{user.name} You Won!'") 
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
-        puts "                   🚁                              \n          
-        🏢 🏢 🌴🏦 🏚️ 🏫 🌳  ⛪ 🏥 🏪 🏠🏠🌴 🏤 🌴 🏢 🌳🌳     \n
-        🚙⁣      🚓      🚓     🚓                                \n
-            🚗      🚓   🚓    🚓     🚓                    \n\n\n"
+puts "                                     🚁             \n          
+🏢 🏢 🌴🏦 🏚️ 🏫 🌳 ⛪ 🏥 🏪 🏠🏠🌴 🏤 🌴 🏢 🌳🌳      \n
+🚙⁣      🚓      🚓     🚓                                \n
+    🚗      🚓   🚓    🚓     🚓                     \n\n\n"
         puts "YOU WIN! \n\n\n$#{(car_2.value * 0.65).to_i} will be added to your balance.😎    Your record is now #{user.wins}-#{user.losses}!" 
         uc.won(car_1,car_2) 
         uc.deteriorate()

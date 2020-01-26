@@ -26,7 +26,7 @@
 # porche2 = Car.create(make:"Porche",model: "Panamera",value: 280000, top_speed:155)
 # mercedez_benz = Car.create(make:"Mercedes-Benz",model: "S-class", value: 138000, top_speed: 173)
 # mercedez_benz = Car.create(make:"Mercedes-Benz",model: "G-Wagon", value: 175000, top_speed: 180)
-dodge1 = Car.create(make:"Dodge",model: "V12Challenger-HellCat", value: 95000, top_speed: 175)
+# dodge1 = Car.create(make:"Dodge",model: "V12Challenger-HellCat", value: 95000, top_speed: 175)
 
 
 
