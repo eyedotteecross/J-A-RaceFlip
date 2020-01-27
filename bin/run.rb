@@ -79,6 +79,7 @@ def make_choice_meth(game_env,car_object=nil)
             system("clear")  
             race_meth()
         elsif make_choice == "BACK TO MAIN MENU"
+            system("clear")
             menu()
         end     
     end 
@@ -194,7 +195,7 @@ end
 
 def race_meth 
     prompt = TTY::Prompt.new
-    puts "#{user.name} Record:#{user.wins}-#{user.losses} BALANCE:$#{user.balance} Cars Owned:#{user.num_cars} W_Streak:#{user.W_streak.to_s + user.last_desc}"
+    puts "#{user.name} Record:#{user.wins}-#{user.losses} BALANCE:$#{user.balance} Cars Owned:#{user.num_cars} W_Streak:#{user.W_streak.to_s + user.last_desc}\n\n\n"
     your_vehicles = user.cars_with_conditions << "BACK TO MAIN MENU"
     chosen_vehicle = prompt.select("Choose your vehicle", your_vehicles)
     if chosen_vehicle == "BACK TO MAIN MENU"
