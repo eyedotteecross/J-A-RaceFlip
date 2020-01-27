@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 5) do
+ActiveRecord::Schema.define(version: 8) do
 
   create_table "cars", force: :cascade do |t|
     t.string "make"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 5) do
     t.integer "wins"
     t.integer "losses"
     t.integer "num_cars"
+    t.integer "W_streak"
+    t.string "last_desc"
   end
 
 end

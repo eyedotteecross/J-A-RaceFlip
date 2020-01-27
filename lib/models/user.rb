@@ -27,16 +27,20 @@ class User < ActiveRecord::Base
 
     def self.leaderboard(stat)
         system("clear")
-        if stat == "Wins" 
-            tp self.all.order(wins: :DESC).limit(15)
-            puts "\nPRESS ENTER TO GO BACK"
-        elsif stat == "Balance"
-            tp self.all.order(balance: :DESC).limit(15)
-            puts "\nPRESS ENTER TO GO BACK"
-        elsif stat == "Cars"
-            tp self.all.order(num_cars: :DESC).limit(15)
-            puts "\nPRESS ENTER TO GO BACK"    
-        end 
+            if stat == "Wins"
+                # User.find :all, :select => “id, name”
+                tp self.all.order(wins: :DESC).limit(15), :id, :name, :wins
+                puts "\nPRESS ENTER TO GO BACK"
+            elsif stat == "Balance"
+                tp self.all.order(balance: :DESC).limit(15), :id, :name, :balance
+                puts "\nPRESS ENTER TO GO BACK"
+            elsif stat == "Cars"
+                tp self.all.order(num_cars: :DESC).limit(15), :id, :name, :num_cars
+                puts "\nPRESS ENTER TO GO BACK"
+            elsif stat == "W_streak"
+                tp self.all.order(W_streak: :DESC).limit(15), :id, :name, :W_streak
+                puts "\nPRESS ENTER TO GO BACK"    
+            end
     end 
 
 end

@@ -43,12 +43,36 @@ class UserCar < ActiveRecord::Base
     def won(car_1,car_2)
         self.user.balance += (car_2.value * 0.65).to_i
         self.user.wins += 1
+        if  self.user.last_desc == "W"
+            self.user.W_streak +=1 
+            self.user.W_streak 
+        else
+            self.user.last_desc = "W"
+            self.user.W_streak = 1
+            self.user.W_streak  
+        end
         self.user.save
     end 
 
     def lost(car_1,car_2)
-        self.user.balance -= 25000
+        self.user.balance += (car_2.value * 0.65).to_i
         self.user.losses += 1
+        if  self.user.last_desc == "L"
+            self.user.W_streak +=1 
+            self.user.W_streak 
+        else
+            self.user.last_desc = "L"
+            self.user.W_streak = 1
+            self.user.W_streak  
+        end 
         self.user.save
+    end 
+
+    def apply_upgrade(upgrade)
+    
+    end 
+    
+    def sell_upgrade(upgrade) 
+
     end 
 end

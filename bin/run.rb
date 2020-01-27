@@ -38,7 +38,7 @@ def run_game
             $user = User.all.find{|username|username.name == log_in.upcase} 
         if  $user == nil
             puts "Hi #{log_in}! Here's 100k! Your username has been saved. Use it to log back in next time."
-            $user = User.create(name:"#{log_in.upcase!}",balance:100000,wins:0,losses:0,num_cars:0)
+            $user = User.create(name:"#{log_in.upcase!}",balance:100000,wins:0,losses:0,num_cars:0,W_streak:0,last_desc:"W")
         else
             puts "Welcome back #{$user.name}! You have $#{$user.balance}."
         end
@@ -68,11 +68,11 @@ def make_choice_meth(game_env,car_object=nil)
         end 
     end
     if game_env == "race"
-        puts "#{car_object} Race 🏁"     
+        puts "#{car_object} W_Streak:#{user.W_streak.to_s + user.last_desc} Race 🏁"     
         puts "CHOOSE YOUR OPPONENT"
         puts "#{user.name} Record:#{user.wins}-#{user.losses} BALANCE:$#{user.balance} \n\n\n"
         make_choice = prompt.select("#{user.name} Choose your opponent vehicle's make.",race_makes)
-        if make_choice != "SWITCH YOUR VEHICLE" 
+        if make_choice != "SWITCH YOUR VEHICLE" && make_choice != "BACK TO MAIN MENU" 
             system("clear") 
             model_choice_meth(make_choice,"race",car_object) 
         elsif make_choice == "SWITCH YOUR VEHICLE"
@@ -113,7 +113,7 @@ def model_choice_meth(make,game_env,car_object=nil)
         end 
     end  
     if game_env == "race" 
-        puts "#{car_object} Race 🏁"  
+        puts "#{car_object} W_Streak:#{user.W_streak.to_s + user.last_desc} Race 🏁"  
         model_choice = prompt.select("Pick your opponent vehicle's model", race_models)
         # binding.pry
         if model_choice != "BACK" && model_choice != "SWITCH YOUR VEHICLE" && model_choice != "BACK TO MAIN MENU"
@@ -194,7 +194,7 @@ end
 
 def race_meth 
     prompt = TTY::Prompt.new
-    puts "#{user.name} Record:#{user.wins}-#{user.losses} BALANCE:$#{user.balance} Cars Owned:#{user.num_cars} Win Streak:\n\n\n"
+    puts "#{user.name} Record:#{user.wins}-#{user.losses} BALANCE:$#{user.balance} Cars Owned:#{user.num_cars} W_Streak:#{user.W_streak.to_s + user.last_desc}"
     your_vehicles = user.cars_with_conditions << "BACK TO MAIN MENU"
     chosen_vehicle = prompt.select("Choose your vehicle", your_vehicles)
     if chosen_vehicle == "BACK TO MAIN MENU"
@@ -236,6 +236,7 @@ puts "                          🚁                        \n      
 🚙⁣      🚓      🚓     🚓                                \n
     🚗      🚓   🚓    🚓     🚓                     \n\n\n"
         puts "YOU WIN! \n\n\n$#{(car_2.value * 0.65).to_i} will be added to your balance.😎    Your record is now #{user.wins}-#{user.losses}!" 
+        user.last_desc = "W"
         uc.won(car_1,car_2) 
         uc.deteriorate()
         menu()
@@ -243,10 +244,11 @@ puts "                          🚁                        \n      
         system("say 'Gotta be quicker than that!'")
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
         puts "Hold this L. \n\n\nYou lost $#{(car_2.value * 0.65).to_i}.😤    You are now #{user.wins}-#{user.losses}"
+        $user.last_desc = "L"
         uc.lost(car_1,car_2)
         uc.deteriorate()
         menu()
-    end  
+    end   
 end
 
 #Displays a navigational menu
@@ -281,15 +283,16 @@ end
 def leaderboards
     prompt = TTY::Prompt.new
     system("clear")
-    stats = ["Wins " "🏆","Balance " "💰","Cars " "🏎️","EXIT"]
+    env_trigger = true
+    stats = ["Wins " "🏆","Balance " "💰","Cars " "🏎️","W_streak " "🔥","EXIT"]
     stat_to_read = prompt.select("Choose a category",stats).split(" ")[0]
-    # binding.pry
     if stat_to_read != "EXIT"
         User.leaderboard(stat_to_read)
         gets.chomp
         leaderboards() 
     else
         system("clear")
+        env_trigger = false 
         menu()                
     end    
 end
