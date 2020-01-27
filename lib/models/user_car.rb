@@ -55,7 +55,7 @@ class UserCar < ActiveRecord::Base
     end 
 
     def lost(car_1,car_2)
-        self.user.balance += (car_2.value * 0.65).to_i
+        self.user.balance -= (car_2.value * 0.65).to_i
         self.user.losses += 1
         if  self.user.last_desc == "L"
             self.user.W_streak +=1 

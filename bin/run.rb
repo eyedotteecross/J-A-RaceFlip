@@ -37,8 +37,8 @@ def run_game
             system("clear")
             $user = User.all.find{|username|username.name == log_in.upcase} 
         if  $user == nil
-            puts "Hi #{log_in}! Here's 100k! Your username has been saved. Use it to log back in next time."
-            $user = User.create(name:"#{log_in.upcase!}",balance:100000,wins:0,losses:0,num_cars:0,W_streak:0,last_desc:"W")
+            puts "Hi #{log_in}! Here's 150k! Your username has been saved. Use it to log back in next time."
+            $user = User.create(name:"#{log_in.upcase!}",balance:150000,wins:0,losses:0,num_cars:0,W_streak:0,last_desc:"W")
         else
             puts "Welcome back #{$user.name}! You have $#{$user.balance}."
         end
@@ -243,6 +243,19 @@ puts "                          🚁                        \n      
         menu()
     else 
         system("say 'Gotta be quicker than that!'")
+        
+    puts " 
+▓██   ██▓ ▒█████   █    ██     ██▓     ▒█████    ██████ ▓█████ 
+ ▒██  ██▒▒██▒  ██▒ ██  ▓██▒   ▓██▒    ▒██▒  ██▒▒██    ▒ ▓█   ▀ 
+  ▒██ ██░▒██░  ██▒▓██  ▒██░   ▒██░    ▒██░  ██▒░ ▓██▄   ▒███   
+  ░ ▐██▓░▒██   ██░▓▓█  ░██░   ▒██░    ▒██   ██░  ▒   ██▒▒▓█  ▄ 
+  ░ ██▒▓░░ ████▓▒░▒▒█████▓    ░██████▒░ ████▓▒░▒██████▒▒░▒████▒
+   ██▒▒▒ ░ ▒░▒░▒░ ░▒▓▒ ▒ ▒    ░ ▒░▓  ░░ ▒░▒░▒░ ▒ ▒▓▒ ▒ ░░░ ▒░ ░
+ ▓██ ░▒░   ░ ▒ ▒░ ░░▒░ ░ ░    ░ ░ ▒  ░  ░ ▒ ▒░ ░ ░▒  ░ ░ ░ ░  ░
+ ▒ ▒ ░░  ░ ░ ░ ▒   ░░░ ░ ░      ░ ░   ░ ░ ░ ▒  ░  ░  ░     ░   
+ ░ ░         ░ ░     ░            ░  ░    ░ ░        ░     ░  ░                                                          
+"                                                       
+
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
         puts "Hold this L. \n\n\nYou lost $#{(car_2.value * 0.65).to_i}.😤    You are now #{user.wins}-#{user.losses}"
         $user.last_desc = "L"

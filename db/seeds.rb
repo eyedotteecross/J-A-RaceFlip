@@ -28,7 +28,22 @@
 # mercedez_benz = Car.create(make:"Mercedes-Benz",model: "G-Wagon", value: 175000, top_speed: 180)
 # dodge1 = Car.create(make:"Dodge",model: "V12Challenger-HellCat", value: 95000, top_speed: 175)
 
-
+# acura2 = Car.create(make:"Acura", model:"NSX-GT3",  value:500000, top_speed: 209)
+# bmw2 = Car.create(make: "BMW", model: "M3", value: 75000, top_speed: 175)
+# honda3 = Car.create(make:"Honda",model: "Civic-TypeR", value: 62000, top_speed: 169)
+# bugatti2 = Car.create(make:"Bugatti",model: "Veryon", value: 3250000, top_speed: 267)
+# bugatti3 = Car.create(make:"Bugatti",model: "Devo", value: 5000000, top_speed: 280)
+# rolls_royce2 = Car.create(make:"Rolls-Royce",model: "Ghost", value: 350000, top_speed: 155)
+# bently2 = Car.create(make:"Bently",model: "Mulsanne", value: 310000, top_speed: 185)
+# toyota3 = Car.create(make:"Toyota",model: "GR-Supra", value: 195000, top_speed: 180)
+# lamborghini2 = Car.create(make:"Lamborghini",model: "Huracan-EVO",value: 450000, top_speed: 225)
+# nissan1 = Car.create(make:"Nissan",model: "Maxima-SR",value: 50000, top_speed: 125)
+# nissan2 = Car.create(make:"Nissan",model: "GT-R",value: 115000, top_speed: 198)
+# audi1 = Car.create(make:"Audi",model: "R8",value: 180000, top_speed: 205)
+# mclaren1 = Car.create(make:"McLren",model: "720s-Spider",value: 315000, top_speed: 218)
+# maserati1 = Car.create(make:"Maserati",model: "MC12-Corsa",value: 1500000, top_speed: 223)
+# jaguar1 = Car.create(make:"Jaguar",model: "F-Type",value: 85000, top_speed: 200)  
+# ford3 = Car.create(make:"Ford",model: "GT",value: 500000, top_speed: 230)
 
 
 
