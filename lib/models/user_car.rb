@@ -19,7 +19,7 @@ class UserCar < ActiveRecord::Base
     end 
 
     def sell(car)
-        self.user.balance += self.car.value * self.condition/112
+        self.user.balance += self.car.value * self.condition/133
         self.user.num_cars -= 1
         self.user.save
         self.delete 
@@ -31,15 +31,15 @@ class UserCar < ActiveRecord::Base
         self.save
         # binding.pry
         if self.condition < 100 && self.condition >= 95
-            self.uc_top_speed = rand(self.uc_top_speed + 10..self.uc_top_speed + 20)
+            self.uc_top_speed = rand(self.uc_top_speed + 10...self.uc_top_speed + 15)
         elsif self.condition < 95 && self.condition >= 85
-            self.uc_top_speed = rand(self.uc_top_speed + 20..self.uc_top_speed + 30)
+            self.uc_top_speed = rand(self.uc_top_speed + 20...self.uc_top_speed + 35)
         elsif self.condition < 85 && self.condition >= 75 
-            self.uc_top_speed = rand(self.uc_top_speed + 30..self.uc_top_speed + 40)
+            self.uc_top_speed = rand(self.uc_top_speed + 30...self.uc_top_speed + 45)
         elsif self.condition < 75 && self.condition >= 60 
-            self.uc_top_speed = rand(self.uc_top_speed + 40..self.uc_top_speed + 50)
+            self.uc_top_speed = rand(self.uc_top_speed + 40...self.uc_top_speed + 60)
         elsif self.condition <= 60
-            self.uc_top_speed = rand(self.uc_top_speed+ 50..self.uc_top_speed + 75)
+            self.uc_top_speed = rand(self.uc_top_speed+ 70...self.uc_top_speed + 85)
         end
     end 
 
