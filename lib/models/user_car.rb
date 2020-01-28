@@ -31,15 +31,15 @@ class UserCar < ActiveRecord::Base
         self.save
         # binding.pry
         if self.condition < 100 && self.condition >= 95
-            self.uc_top_speed = rand(self.uc_top_speed + 10...self.uc_top_speed + 15)
+            self.uc_top_speed = rand(self.uc_top_speed + 5...self.uc_top_speed + 10)
         elsif self.condition < 95 && self.condition >= 85
-            self.uc_top_speed = rand(self.uc_top_speed + 20...self.uc_top_speed + 35)
+            self.uc_top_speed = rand(self.uc_top_speed + 15...self.uc_top_speed + 25)
         elsif self.condition < 85 && self.condition >= 75 
-            self.uc_top_speed = rand(self.uc_top_speed + 30...self.uc_top_speed + 45)
+            self.uc_top_speed = rand(self.uc_top_speed + 25...self.uc_top_speed + 40)
         elsif self.condition < 75 && self.condition >= 60 
-            self.uc_top_speed = rand(self.uc_top_speed + 40...self.uc_top_speed + 60)
+            self.uc_top_speed = rand(self.uc_top_speed + 40...self.uc_top_speed + 50)
         elsif self.condition <= 60
-            self.uc_top_speed = rand(self.uc_top_speed+ 70...self.uc_top_speed + 85)
+            self.uc_top_speed = rand(self.uc_top_speed+ 50...self.uc_top_speed + 75)
         end
     end 
 
