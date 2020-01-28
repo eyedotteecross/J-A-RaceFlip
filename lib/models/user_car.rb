@@ -25,18 +25,26 @@ class UserCar < ActiveRecord::Base
         self.delete 
     end 
 
-    def top_speed_nerf
-        self.uc_top_speed *= (self.condition.to_f/100)
+    def speed_adjust
+        nerf_or_buff_force = self.condition * 0.01
+        self.uc_top_speed *= nerf_or_buff_force
         self.save
-    end
-    
-    def top_speed_heavy_nerf
-        self.uc_top_speed *= (self.condition.to_f/120)
-        self.save
+        # binding.pry
+        if self.condition < 100 && self.condition >= 95
+            self.uc_top_speed = rand(self.uc_top_speed + 10..self.uc_top_speed + 20)
+        elsif self.condition < 95 && self.condition >= 85
+            self.uc_top_speed = rand(self.uc_top_speed + 20..self.uc_top_speed + 30)
+        elsif self.condition < 85 && self.condition >= 75 
+            self.uc_top_speed = rand(self.uc_top_speed + 30..self.uc_top_speed + 40)
+        elsif self.condition < 75 && self.condition >= 60 
+            self.uc_top_speed = rand(self.uc_top_speed + 40..self.uc_top_speed + 50)
+        elsif self.condition <= 60
+            self.uc_top_speed = rand(self.uc_top_speed+ 50..self.uc_top_speed + 75)
+        end
     end 
 
     def deteriorate
-        self.condition -= 7
+        self.condition -= rand(2...8)
         self.save
     end 
 

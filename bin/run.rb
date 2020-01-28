@@ -22,9 +22,7 @@ def intro
     render_ascii_art()
     puts "🏎️" 
     puts "Welcome to A/J Raceway!" 
-    puts "🏎️" 
-    puts 
-    puts
+    puts "🏎️\n\n" 
     puts "PRESS ENTER"
     gets.chomp
     system("clear") 
@@ -94,7 +92,7 @@ def model_choice_meth(make,game_env,car_object=nil)
         if model_choice != "BACK" && model_choice != "EXIT SHOP"
             # system("clear")
             car_choice= Car.all.find{|car|car.model + " PRICE:$#{car.value}" == model_choice}
-            # binding.pry
+            #binding.pry
             if user.balance < car_choice.value
                 puts "You do not have enough money to buy this car"
                 gets.chomp
@@ -223,20 +221,19 @@ def new_race(car_1,car_2)
     # binding.pry
     uc = user.user_cars.find{|current_uc| current_uc.car.model == car_1.model}
     system("clear")
-    if uc.condition < 75
-        uc.top_speed_nerf()
-    elsif uc.condition < 50 
-        uc.top_speed_heavy_nerf()
-    end 
-    # binding.pry     
-    if uc.uc_top_speed > car_2.top_speed
+    uc.speed_adjust()
+    # binding.pry
+    ots = car_2.top_speed  
+    ots = rand(ots-10..ots+10)     
+    if uc.uc_top_speed > ots
         system("say 'Congratulations #{user.name} You Won!'") 
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
 puts "                          🚁                        \n          
 🏢 🏢 🌴🏦 🏚️ 🏫 🌳 ⛪ 🏥 🏪 🏠🏠🌴 🏤 🌴 🏢 🌳🌳      \n
-🚙⁣      🚓      🚓     🚓                                \n
-    🚗      🚓   🚓    🚓     🚓                     \n\n\n"
+🚙⁣            🚓      🚓     🚓                           \n
+    🚗         🚓   🚓    🚓     🚓                   \n\n\n"
         puts "YOU WIN! \n\n\n$#{(car_2.value * 0.65).to_i} will be added to your balance.😎    Your record is now #{user.wins}-#{user.losses}!" 
+        puts "\nTop Speed:#{uc.uc_top_speed}MPH\nOpponent top Speed:#{car_2.top_speed}MPH"
         user.last_desc = "W"
         uc.won(car_1,car_2) 
         uc.deteriorate()
@@ -258,6 +255,7 @@ puts "                          🚁                        \n      
 
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
         puts "Hold this L. \n\n\nYou lost $#{(car_2.value * 0.65).to_i}.😤    You are now #{user.wins}-#{user.losses}"
+        puts "\nTop Speed:#{uc.uc_top_speed}MPH\nOpponent top Speed:#{car_2.top_speed}MPH"
         $user.last_desc = "L"
         uc.lost(car_1,car_2)
         uc.deteriorate()
