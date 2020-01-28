@@ -11,7 +11,7 @@ class UserCar < ActiveRecord::Base
     end 
     
     def fix(car)
-        self.user.balance -= self.car.value * self.condition/1111 
+        self.user.balance -= self.car.value * self.condition/999 
         self.condition = 100
         self.uc_top_speed = self.car.top_speed
         self.user.save
@@ -19,7 +19,7 @@ class UserCar < ActiveRecord::Base
     end 
 
     def sell(car)
-        self.user.balance += self.car.value * self.condition/100
+        self.user.balance += self.car.value * self.condition/112
         self.user.num_cars -= 1
         self.user.save
         self.delete 

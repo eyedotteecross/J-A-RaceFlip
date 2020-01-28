@@ -169,18 +169,18 @@ def garage
         car_object = user.cars.find{|car| car.model == chosen_vehicle.split[1]}
         uc_object = user.user_cars.find{|ucar| ucar.car == car_object}  
         system("clear")
-        choices = ["Fix 🔧 -$#{car_object.value * uc_object.condition/1111}", "Sell 💸 +$#{car_object.value * uc_object.condition/100}", "BACK"]
+        choices = ["Fix 🔧 -$#{car_object.value * uc_object.condition/999}", "Sell 💸 +$#{car_object.value * uc_object.condition-10/112}", "BACK"]
         choice = prompt.select("#{chosen_vehicle}", choices)
-        if  choice == "Fix 🔧 -$#{car_object.value * uc_object.condition/1111}"
-            repair_cost = "#{car_object.value * uc_object.condition/1111}" 
+        if  choice == "Fix 🔧 -$#{car_object.value * uc_object.condition/999}"
+            repair_cost = "#{car_object.value * uc_object.condition/999}" 
             uc_object.fix(car_object)
             puts "Your vehicle has been repaired. You have been charged $#{repair_cost}"
             puts
             garage()
-        elsif choice == "Sell 💸 +$#{car_object.value * uc_object.condition/100}" && user.user_cars.size != 1
+        elsif choice == "Sell 💸 +$#{car_object.value * (uc_object.condition-10)/112}" && user.user_cars.size != 1
             uc_object.sell(car_object)
             garage()
-        elsif choice == "Sell 💸 +$#{car_object.value * uc_object.condition/100}" && user.user_cars.size == 1     
+        elsif choice == "Sell 💸 +$#{car_object.value * (uc_object.condition-10)/112}" && user.user_cars.size == 1     
             system("clear")
             puts "Nope. You must keep one car in your garage!" 
             garage()               
@@ -233,7 +233,7 @@ puts "                          🚁                        \n      
 🚙⁣            🚓      🚓     🚓                           \n
     🚗         🚓   🚓    🚓     🚓                   \n\n\n"
         puts "YOU WIN! \n\n\n$#{(car_2.value * 0.65).to_i} will be added to your balance.😎    Your record is now #{user.wins}-#{user.losses}!" 
-        puts "\nTop Speed:#{uc.uc_top_speed}MPH\nOpponent top Speed:#{car_2.top_speed}MPH"
+        puts "\nTop Speed:#{uc.uc_top_speed}MPH\nOpponent top Speed:#{ots}MPH"
         user.last_desc = "W"
         uc.won(car_1,car_2) 
         uc.deteriorate()
