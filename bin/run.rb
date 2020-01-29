@@ -224,9 +224,9 @@ def new_race(car_1,car_2)
     uc = user.user_cars.find{|current_uc| current_uc.car.model == car_1.model}
     system("clear")
     uc.speed_adjust()
-    # binding.pry
     ots = car_2.top_speed  
     ots = rand(ots-11...ots+12)     
+    # binding.pry
     if uc.uc_top_speed > ots
         system("say 'Congratulations #{user.name} You Won!'") 
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
@@ -234,10 +234,10 @@ puts "                          🚁                        \n      
 🏢 🏢 🌴🏦 🏚️ 🏫 🌳 ⛪ 🏥 🏪 🏠🏠🌴 🏤 🌴 🏢 🌳🌳      \n
 🚙⁣            🚓      🚓     🚓                           \n
     🚗         🚓   🚓    🚓     🚓                   \n\n\n"
+        uc.won(car_1,car_2) 
         puts "YOU WIN! \n\n\n$#{(car_2.value * 0.65).to_i} will be added to your balance.😎    Your record is now #{user.wins}-#{user.losses}!" 
         puts "\nTop Speed:#{uc.uc_top_speed}MPH\nOpponent top Speed:#{ots}MPH"
         user.last_desc = "W"
-        uc.won(car_1,car_2) 
         uc.deteriorate()
         menu()
     else 
@@ -255,12 +255,12 @@ puts "                          🚁                        \n      
  ░ ░         ░ ░     ░            ░  ░    ░ ░        ░     ░  ░    
  "                                                      
 
+        uc.lost(car_1,car_2)
         puts "#{car_1.make} #{car_1.model} vs #{car_2.make} #{car_2.model}"
-        puts "Hold this L. \n\n\nYou lost $#{(car_2.value * 0.65).to_i}.😤    You are now #{user.wins}-#{user.losses}"
         puts "\nTop Speed:#{uc.uc_top_speed}MPH\nOpponent top Speed:#{ots}MPH"
         $user.last_desc = "L"
-        uc.lost(car_1,car_2)
         uc.deteriorate()
+        puts "Hold this L. \n\n\nYou lost $#{(car_2.value * 0.65).to_i}.😤    You are now #{user.wins}-#{user.losses}"
         menu()
     end   
 end

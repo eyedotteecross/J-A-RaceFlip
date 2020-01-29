@@ -49,3 +49,5 @@
 # ferrari3 = Car.create(make:"Ferrari",model: "Monza-SP2",value: 2300000, top_speed: 247)
 # mclaren2 = Car.create(make:"McLaren",model: "Senna",value: 975000, top_speed: 208)
 # mercedez_benz3 = Car.create(make:"Mercedes-Benz",model: "ProjectONE", value: 2600000, top_speed: 230)
+# hennessey1 = Car.create(make:"Hennessey",model: "VenomF5", value: 1900000, top_speed: 260)
+# range1 = Car.create(make:"RangeRover",model: "VelarSVR", value: 285000, top_speed: 196)

@@ -26,6 +26,7 @@ class UserCar < ActiveRecord::Base
     end 
 
     def speed_adjust
+        
         nerf_or_buff_force = self.condition * 0.01
         self.uc_top_speed *= nerf_or_buff_force
         self.save
@@ -35,11 +36,11 @@ class UserCar < ActiveRecord::Base
         elsif self.condition < 95 && self.condition >= 85
             self.uc_top_speed = rand(self.uc_top_speed + 15...self.uc_top_speed + 25)
         elsif self.condition < 85 && self.condition >= 75 
-            self.uc_top_speed = rand(self.uc_top_speed + 25...self.uc_top_speed + 40)
+            self.uc_top_speed = rand(self.uc_top_speed + 35...self.uc_top_speed + 45)
         elsif self.condition < 75 && self.condition >= 60 
-            self.uc_top_speed = rand(self.uc_top_speed + 40...self.uc_top_speed + 50)
+            self.uc_top_speed = rand(self.uc_top_speed + 40...self.uc_top_speed + 55)
         elsif self.condition <= 60
-            self.uc_top_speed = rand(self.uc_top_speed+ 50...self.uc_top_speed + 75)
+            self.uc_top_speed = rand(self.uc_top_speed+ 55...self.uc_top_speed + 80)
         end
     end 
 
