@@ -5,5 +5,6 @@ class Car < ActiveRecord::Base
     def name
         s = "#{self.make} #{self.model}"
         s.gsub!(/\A"|"\Z/, '')
+        
     end 
 end
